@@ -1,0 +1,18 @@
+<h1>Recipes</h1>
+<%= form_tag(recipes_path, method: :get) do %>
+  <%= text_field_tag :search, params[:search] %>
+  <%= submit_tag 'Search', name: nil %>
+<% end %>
+
+<% @recipes.each do |recipe| %>
+  <div class="article">
+    <h2 class="recipe-main"><%= link_to recipe.name, recipe %></h2>
+
+  </div>
+<% end %>
+
+<div class="recipe-editor">
+  <% if logged_in? %>
+    <%= link_to "Add New Recipe", new_recipe_path, class: "btn btn-sm btn-primary" %>
+  <% end %>
+</div>
