@@ -1,0 +1,42 @@
+<%= form_for(recipe) do |f| %>
+  <%= render 'shared/errors', object: f.object %>
+
+  <div class="field">
+    <%= f.label :name, "Recipe Name" %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <h3>Time</h3>
+    <span><%= f.label :prep_time, "Prep Time" %></span>
+    <span><%= f.text_field :prep_time%> minutes</span>
+    <span><%= f.label :cook_time, "Cook Time" %></span>
+    <span><%= f.text_field :cook_time %> minutes</span>
+  </div>
+<h3>Ingredients</h3>
+  <%= f.fields_for(:recipe_ingredients) do |ri| %>
+    <%= ri.fields_for(:ingredient) do |ingredient| %>
+      <span class="ingredient">
+        <%= ingredient.label :name, "Name" %>
+        <%= ingredient.text_field :name %>
+      </span>
+    <% end %>
+  <span class="quantity">
+    <%= ri.label :quantity, "Quantity" %>
+    <%= ri.text_field :quantity %>
+  </span>
+      <br>
+  <% end %>
+  <h3>Directions</h3>
+  <%= f.fields_for(:directions) do |direction| %>
+    <div class="direction">
+      <%= direction.text_area :text, size: "60x3" %>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field(:user_id, value: current_user.id) %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
