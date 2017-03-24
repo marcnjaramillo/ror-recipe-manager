@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
 
   def new
     @user = User.new
@@ -8,8 +9,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      flash[:success] = "Congratulations! You have successfully signed up."
-      redirect_to user_path(@user)
+      flash[:success] = "Successfully signed up."
+      redirect_back_or(user_path(@user))
     else
       render :new
     end
@@ -27,7 +28,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      flash[:success] = "Your information successfully updated."
+      flash[:success] = "Successfully updated."
       redirect_to user_path(@user)
     else
       render :edit
@@ -37,7 +38,7 @@ class UsersController < ApplicationController
   def destroy
     User.find(params[:id]).destroy
     session.delete(:user_id)
-    flash[:success] = "Your account has been successfully deleted."
+    flash[:success] = "Deleted user."
     redirect_to root_url
   end
 
@@ -45,5 +46,13 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:id, :username, :email, :password)
+  end
+
+  def logged_in_user
+    unless logged_in?
+      store_location
+      flash[:danger] = "Please log in."
+      redirect_to login_url
+    end
   end
 end
