@@ -1,0 +1,30 @@
+<div class="recipe-name">
+  <h1>
+    <%= @recipe.name %>
+    <div>
+
+        <%= link_to "Edit Recipe", edit_recipe_path(@recipe), class: "btn btn-sm btn-primary" %>
+        <%= link_to "Delete Recipe", recipe_path(@recipe), method: :delete, class: "btn btn-sm btn-default" %>
+
+      <% end %>
+    </div>
+  </h1>
+  <p>Prep Time: <%= @recipe.prep_time %> minutes | Cook Time: <%= @recipe.cook_time %> minutes</p>
+</div>
+
+<h2>Ingredients</h2>
+<ul>
+  <% @recipe.recipe_ingredients.each do |ri| %>
+    <li><%= ri.quantity %> <%= ri.ingredient.name %></li>
+  <% end %>
+</ul>
+
+
+<h2>Directions</h2>
+<ul>
+  <% @recipe.directions.each do |dir| %>
+    <li id="directions" ><%= dir.text %></li>
+  <% end %>
+</ul>
+
+<%= link_to "Recipes Home", recipes_path, class: "btn btn-sm btn-primary" %>
