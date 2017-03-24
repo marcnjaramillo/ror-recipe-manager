@@ -1,7 +1,7 @@
 <h1>
   <%= @user.username.capitalize %>
-  <div>
-
+  <div class="user-editor">
+    <% if logged_in? && @user == current_user %>
       <%= link_to "Edit Your Profile", edit_user_path(@user), class: "btn btn-sm btn-primary" %>
       <%= link_to "Delete Your Account", user_path(@user), method: :delete, class: "btn btn-sm btn-default" %>
       <%= link_to "Add Recipe", new_recipe_path, class: "btn btn-sm btn-primary" %>
@@ -14,9 +14,11 @@
   <ul>
     <% @recipes.each do |recipe| %>
       <%=  link_to recipe.name, user_recipe_path(recipe), class:"recipe-name" %>
-      <div>
-        <%= link_to "Edit Recipe", edit_recipe_path(recipe), class: "btn btn-sm btn-primary" %>
-        <%= link_to "Delete Recipe", recipe_path(recipe), method: :delete, class: "btn btn-sm btn-default" %>
+      <div class="recipe-editor">
+        <% if logged_in? && recipe.creator == current_user %>
+          <%= link_to "Edit Recipe", edit_recipe_path(recipe), class: "btn btn-sm btn-primary" %>
+          <%= link_to "Delete Recipe", recipe_path(recipe), method: :delete, class: "btn btn-sm btn-default" %>
+        <% end %>
       </div>
     <% end %>
   </ul>
