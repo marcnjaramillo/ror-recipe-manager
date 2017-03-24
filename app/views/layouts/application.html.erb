@@ -9,6 +9,30 @@
   </head>
 
   <body>
+    <header class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <%= link_to "Recipe Manager", '/', id: "logo" %>
+        <nav>
+          <% if logged_in? %>
+            <p class="navbar-text"><%= current_user.username.capitalize %></p>
+          <% end %>
+          <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to "Home", '/', id:"home" %></li>
+            <% if logged_in? %>
+              <li><%= link_to "My Page", user_path(current_user) %></li>
+              <li><%= link_to "Sign Out", signout_path %></li>
+            <% else %>
+              <li><%= link_to "Sign Up", signup_path %></li>
+              <li><%= link_to "Sign In", signin_path %></li>
+            <% end %>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="container main">
+      <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
     <%= yield %>
   </body>
 </html>
