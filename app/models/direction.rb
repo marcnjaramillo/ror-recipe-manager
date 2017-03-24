@@ -1,0 +1,3 @@
+class Direction < ApplicationRecord
+
+end
