@@ -1,0 +1,169 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+
+$light-brown: #614D2B;
+$brown: #58472A;
+$white: #FFF;
+$off-white: #F5F5F5;
+
+/* body */
+body {
+  margin-bottom: 50px;
+  background: url(asset_path('cooking.jpg')) no-repeat;
+  background-size: cover;
+}
+
+.main {
+  background: rgba(157, 157, 157, 0.8);
+}
+
+.btn {
+  margin-bottom: 20px;
+}
+
+.btn-primary {
+  background-color: $light-brown;
+  border-color: $light-brown;
+  &:hover {
+    background-color: $brown;
+    border-color: $brown;
+  }
+}
+
+#creator {
+  font-size: 16px;
+}
+
+.navbar-text {
+  font-size: 16px;
+}
+
+/* header */
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: $white;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+  &:hover {
+    color: $white;
+    text-decoration: none;
+  }
+}
+
+nav .navbar-text {
+  font-style: italic;
+}
+
+@media (max-width: 767px) {
+  nav {
+    clear: both;
+    position: relative;
+    .navbar-text {
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      margin-bottom: 7.5px;
+      font-size: 12px;
+    }
+  }
+
+  li a#home {
+    display: none;
+  }
+}
+
+/* container next to header */
+
+@media (max-width: 767px) {
+  header + div.container {
+    margin-top: 130.5px;
+  }
+}
+
+@media (min-width: 768px) {
+  header + div.container {
+    margin-top: 51px;
+  }
+}
+
+/* recipe */
+
+h1 div.recipe-editor {
+  display: block;
+  margin: 10px 10px 10px 0px;
+}
+
+h2 div.recipe-editor {
+  display: inline-block;
+  margin: 10px 10px 10px 0px;
+}
+
+li {
+  list-style: none;
+  color: $off-white;
+}
+
+/* li#directions {
+  list-style: decimal;
+} */
+
+p {
+  color: $off-white;
+}
+
+a {
+  color: $light-brown;
+  .recipe-name {
+    font-size: 20px;
+  }
+  &:hover {
+    color: #251D10;
+  }
+}
+
+h2.recipe-main a{
+  color: #5A3A02;
+}
+
+ul {
+  padding-left: 0px;
+}
+
+/* user */
+
+h1 div.user-editor {
+  display: block;
+  margin: 10px 10px 10px 0px;
+}
+
+/* form */
+
+li .form-control {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+li .form-inline .form-control {
+  margin-right: 10px;
+}
+
+div#form_error ul {
+  color: #A94442
+}
+
+div.field_with_errors input.form-control {
+  border-color: #C75351
+}
+
+/* alert */
+
+.alert {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
