@@ -2,14 +2,14 @@
   <h1>
     <%= @recipe.name %>
     <div class="recipe-editor">
-      <% if logged_in? && @recipe.creator == current_user %>
+      <% if logged_in? && @recipe.user == current_user %>
         <%= link_to "Edit Recipe", edit_recipe_path(@recipe), class: "btn btn-sm btn-primary" %>
         <%= link_to "Delete Recipe", recipe_path(@recipe), method: :delete, class: "btn btn-sm btn-default" %>
-        <%= link_to "#{@recipe.creator.username.capitalize}'s Page", user_path(@recipe.creator), class: "btn btn-sm btn-primary" %>
+        <%= link_to "#{@recipe.user.username.capitalize}'s Page", user_path(@recipe.user), class: "btn btn-sm btn-primary" %>
       <% end %>
     </div>
   </h1>
-  <p>Prep Time: <%= @recipe.prep_time %> minutes | Cook Time: <%= @recipe.cook_time %> minutes | Recipe by: <%= link_to @recipe.creator.username.capitalize, user_path(@recipe.creator), id: "creator" %></p>
+  <p>Prep Time: <%= @recipe.prep_time %> minutes | Cook Time: <%= @recipe.cook_time %> minutes | Recipe by: <%= link_to @recipe.user.username.capitalize, user_path(@recipe.user), id: "user" %></p>
 </div>
 
 <h2>Ingredients</h2>

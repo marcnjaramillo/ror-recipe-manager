@@ -50,7 +50,7 @@ class RecipesController < ApplicationController
 
   def destroy
     recipe = Recipe.find(params[:id])
-    user = recipe.creator
+    user = recipe.user
     recipe.destroy
     flash[:success] = "Recipe successfully deleted."
     redirect_to user_path(user)
