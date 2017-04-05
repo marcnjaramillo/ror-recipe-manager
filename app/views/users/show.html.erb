@@ -4,7 +4,7 @@
     <% if logged_in? && @user == current_user %>
       <%= link_to "Edit Your Profile", edit_user_path(@user), class: "btn btn-sm btn-primary" %>
       <%= link_to "Delete Your Account", user_path(@user), method: :delete, class: "btn btn-sm btn-default" %>
-      <%= link_to "Add Recipe", new_recipe_path, class: "btn btn-sm btn-primary" %>
+      <%= link_to "Add Recipe", new_user_recipe_path(@user), class: "btn btn-sm btn-primary" %>
     <% end %>
   </div>
 </h1>
