@@ -5,6 +5,7 @@ class RecipesController < ApplicationController
   end
 
   def new
+    @user = current_user
     @recipe = Recipe.new
     10.times {
       @recipe.recipe_ingredients.build.build_ingredient

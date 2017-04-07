@@ -16,7 +16,7 @@
       <%=  link_to recipe.name, user_recipe_path(recipe), class:"recipe-name" %>
       <div class="recipe-editor">
         <% if logged_in? && recipe.user == current_user %>
-          <%= link_to "Edit Recipe", edit_recipe_path(recipe), class: "btn btn-sm btn-primary" %>
+          <%= link_to "Edit Recipe", edit_user_recipe_path(recipe), class: "btn btn-sm btn-primary" %>
           <%= link_to "Delete Recipe", recipe_path(recipe), method: :delete, class: "btn btn-sm btn-default" %>
         <% end %>
       </div>
