@@ -7,19 +7,17 @@ class RecipesController < ApplicationController
   def new
     @user = current_user
     @recipe = Recipe.new
-    10.times {
-      @recipe.recipe_ingredients.build.build_ingredient
-    }
-    5.times {
-      @recipe.directions.build
-    }
   end
 
   def create
     @recipe = Recipe.create(recipe_params)
     if @recipe.save
       flash[:success] = "Recipe successfully saved."
-      redirect_to recipe_path(@recipe)
+      build_recipe_ingredients(recipe_params)
+      respond_to do |f|
+        f.html { redirect_to recipe_ingredients_path(@recipe) }
+        f.json { render json: @recipe }
+      end
     else
       render :new
     end
@@ -35,12 +33,6 @@ class RecipesController < ApplicationController
 
   def edit
     @recipe = Recipe.find(params[:id])
-    10.times {
-      @recipe.recipe_ingredients.build.build_ingredient
-    }
-    5.times {
-      @recipe.directions.build
-    }
   end
 
   def update
@@ -70,11 +62,9 @@ class RecipesController < ApplicationController
       :cook_time,
       :user_id,
       :search,
-      directions_attributes: [:id, :text],
-      recipe_ingredients_attributes: [
-        :id,
-        :quantity,
-        ingredient_attributes: [:id, :name]
+      directions_attributes: [:text],
+      ingredients_attributes: [:name,
+        recipe_ingredients_attributes: [:quantity]
       ]
     )
   end
