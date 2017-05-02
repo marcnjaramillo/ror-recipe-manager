@@ -12,6 +12,15 @@ class Recipe < ApplicationRecord
   scope :sorted, lambda {order("created_at DESC")}
   scope :search, lambda {|search| where(["name LIKE ?", "%#{search}%"])}
 
+  def ingredients_attributes=(ingredient_attributes)
+    ingredient_attributes.values.each do |ingredient_attribute|
+      if ingredient_attribute[:name] != ""
+        ingredient = Ingredient.find_or_create_by(name: ingredient_attribute[:name])
+        self.ingredients << ingredient unless self.ingredients.include?(ingredient)
+      end
+    end
+  end
+
   def empty_children(attributes)
     attributes['name'].blank? && attributes['quantity'].blank?
   end
