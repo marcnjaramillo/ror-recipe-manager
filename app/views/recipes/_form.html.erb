@@ -15,22 +15,10 @@
   </div>
 
 <h3>Ingredients</h3>
-  <%= f.fields_for :ingredients, @recipe.ingredients.build do |ingredient| %>
-    <span class="ingredient">
-      <%= ingredient.label :name, "Name" %>
-      <%= ingredient.text_field :name %>
-    </span>
-
-  <%= ingredient.fields_for :recipe_ingredients, @recipe.recipe_ingredients.build do |ri| %>
-    <span class="quantity">
-      <%= ri.label :quantity, "Quantity" %>
-      <%= ri.text_field :quantity %>
-    </span>
-      <br>
-  <% end %>
-  <% end %>
-  <div class='form-group'>
-    
+  <%= render :partial => "/ingredients/ingredients_form", :locals => { :f => f } %>
+    <div class='form-group'>
+      <button id="new_ingredient_button" type="button" data-url="/recipes/ingredients/new">Add New Ingredient</button>
+    </div>
   <h3>Directions</h3>
   <%= f.fields_for :directions, @recipe.directions.build do |direction| %>
     <div class="direction">
