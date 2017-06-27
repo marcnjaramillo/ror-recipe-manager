@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :recipes
   end
 
+  get 'recipes/ingredients/new', to: 'ingredients#new'
   get 'signup', to: 'users#new'
   get 'signin', to: 'sessions#new'
   post 'signin', to: 'sessions#create'
