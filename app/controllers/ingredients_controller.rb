@@ -4,6 +4,6 @@ class IngredientsController < ApplicationController
   end
 
   def new
-    render :layout => false
+    render 'ingredients/_new_ingredient', :layout => false
   end
 end

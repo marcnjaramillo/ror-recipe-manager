@@ -10,6 +10,7 @@ class RecipesController < ApplicationController
   end
 
   def create
+    binding.pry
     @recipe = Recipe.create(recipe_params)
     if @recipe.save
       flash[:success] = "Recipe successfully saved."
@@ -63,9 +64,7 @@ class RecipesController < ApplicationController
       :user_id,
       :search,
       directions_attributes: [:text],
-      ingredients_attributes: [:name,
-        recipe_ingredients_attributes: [:quantity]
-      ]
+      ingredients_attributes: [:name, :quantity]
     )
   end
 end
