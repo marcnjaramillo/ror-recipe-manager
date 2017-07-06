@@ -13,10 +13,10 @@ class Recipe < ApplicationRecord
   scope :search, lambda {|search| where(["name LIKE ?", "%#{search}%"])}
 
   def ingredients_attributes=(ingredient_attributes)
-    ingredient_attributes.values.each do |ingredient_attribute|
-      if ingredient_attribute[:name] != ""
-        ingredient = Ingredient.find_or_create_by(name: ingredient_attribute[:name])
-        self.ingredients << ingredient unless self.ingredients.include?(ingredient)
+    ingredient_attributes.each do |ingredient_hash|
+      if ingredient_hash[:name] != ""
+        ingredient = Ingredient.find_or_create_by(name: ingredient_hash[:name])
+        self.recipe_ingredients.build(ingredient: ingredient, quantity: ingredient_hash[:quantity])
       end
     end
   end

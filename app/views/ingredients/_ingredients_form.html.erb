@@ -1,16 +1,15 @@
-<%= f.fields_for :ingredients, @recipe.ingredients.build do |ingredient| %>
+<%= f.fields_for :recipe_ingredients, @recipe.recipe_ingredients.build do |ri| %>
   <span class="ingredient">
     <%= ingredient.label :name, "Name" %>
     <%= ingredient.text_field :name %>
   </span>
 
-<%= ingredient.fields_for :recipe_ingredients, @recipe.recipe_ingredients.build do |ri| %>
+
   <span class="quantity">
-    <%= ri.label :quantity, "Quantity" %>
-    <%= ri.text_field :quantity %>
+    <%= ingredient.label :quantity, "Quantity" %>
+    <%= ingredient.text_field :quantity %>
   </span>
     <br>
-<% end %>
 <% end %>
 
 

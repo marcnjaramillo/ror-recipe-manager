@@ -10,13 +10,11 @@ class RecipesController < ApplicationController
   end
 
   def create
-    binding.pry
     @recipe = Recipe.create(recipe_params)
     if @recipe.save
       flash[:success] = "Recipe successfully saved."
-      build_recipe_ingredients(recipe_params)
       respond_to do |f|
-        f.html { redirect_to recipe_ingredients_path(@recipe) }
+        f.html { redirect_to recipe_path(@recipe) }
         f.json { render json: @recipe }
       end
     else
