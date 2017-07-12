@@ -4,12 +4,11 @@
   <%= submit_tag 'Search', name: nil %>
 <% end %>
 
-<% @recipes.each do |recipe| %>
-  <div class="article">
-    <h2 class="recipe-main"><%= link_to recipe.name, recipe %></h2>
-
-  </div>
-<% end %>
+<div class="article">
+  <% @recipes.each do |recipe| %>
+      <h2 class="recipe-main"><%= link_to recipe.name, recipe, id: "recipe" %></h2>
+  <% end %>
+</div>
 
 <div class="recipe-editor">
   <% if logged_in? %>

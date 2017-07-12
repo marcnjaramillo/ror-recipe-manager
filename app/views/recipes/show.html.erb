@@ -17,6 +17,7 @@
   <% @recipe.recipe_ingredients.each do |ri| %>
     <li><%= ri.quantity %> <%= ri.ingredient.name %></li>
   <% end %>
+  <button id="new_ingredient_button" type="button" data-url="/recipes/ingredients/new">Add New Ingredient</button>
 </ul>
 
 
