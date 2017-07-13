@@ -1,8 +1,10 @@
-<h1>Recipes</h1>
-<%= form_tag(recipes_path, method: :get) do %>
-  <%= text_field_tag :search, params[:search] %>
-  <%= submit_tag 'Search', name: nil %>
-<% end %>
+<div class="search-box">
+  <h1>Recipes</h1>
+  <%= form_tag(recipes_path, method: :get) do %>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag 'Search', name: nil %>
+  <% end %>
+</div>
 
 <div class="article">
   <% @recipes.each do |recipe| %>

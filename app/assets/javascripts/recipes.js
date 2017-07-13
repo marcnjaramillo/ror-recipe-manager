@@ -26,7 +26,7 @@ $(() => {
 const bindClickHandlers = () => {
   $('.all_recipes').on('click', event => {
     event.preventDefault()
-    history.pushState(null, null, "recipes")
+    history.pushState(null, null, `/recipes`)
     fetch(`/recipes.json`)
       .then(response => response.json())
       .then(recipes => {
@@ -41,11 +41,13 @@ const bindClickHandlers = () => {
 
   $(document).on('click', ".show", function(event) {
     event.preventDefault()
-    $('.article').html('')
     let id = $(this).attr('data-id')
+    history.pushState(null, null, `/recipes/${id}`)
     fetch(`/recipes/${id}.json`)
     .then(response => response.json())
     .then(recipe => {
+      //$('.search-box').html('')
+      $('.article').html('')
       let newRecipe = new Recipe(recipe)
       let recipeHtml = newRecipe.formatShow()
       $('.article').append(recipeHtml)
@@ -73,10 +75,14 @@ Recipe.prototype.formatIndex = function() {
 Recipe.prototype.formatShow = function() {
   let recipeHtml = `
     <h1>${this.name}</h1>
-    <p>Prep Time: ${this.prep_time} | Cook Time: ${this.cook_time}</p>
+    <p>Prep Time: ${this.prep_time} minutes | Cook Time: ${this.cook_time} minutes</p>
     <h2>Ingredients</h2>
     <ul>
-      <li>${this.recipe_ingredients}</li>
+      ${this.recipe_ingredients.map(ri => `<li> ${ri.quantity} ${ri.ingredient} </li>` ).join("")}
+    </ul>
+    <h2> Directions </h2>
+    <ul>
+      ${this.directions.map(d => `<li> ${d.text} </li>` ).join("")}
     </ul>
   `
 
