@@ -25,7 +25,7 @@
             <p class="navbar-text"><%= current_user.username.capitalize %></p>
           <% end %>
           <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to "Recipes", '/', class:"all_recipes" %></li>
+            <li><%= link_to "Recipes", '/index', class:"all_recipes" %></li>
             <% if logged_in? %>
               <li><%= link_to "My Page", user_path(current_user) %></li>
               <li><%= link_to "Sign Out", signout_path %></li>
