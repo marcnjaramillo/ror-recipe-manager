@@ -1,24 +1,3 @@
-// $(document).ready(function() {
-//   $("#new_ingredient_button").click(function(event) {
-//     var $button = $(this);
-//     var url = $(this).data("url")
-//
-//     $.get(url, function(response) {
-//       $button.before(response)
-//     })
-//     event.preventDefault();
-//        addNewIngredient();
-//   });
-// });
-//
-// var addNewIngredient = function() {
-//     var $new_ingredients = $("#new_ingredients");
-//     var ingredientInput = `<name="recipe[ingredients_attributes][][name]">`;
-//     ingredientInput += `< name="recipe[ingredients_attributes][][quantity]">`
-//     $new_ingredients.append(ingredientInput);
-// }
-
-
 $(() => {
   bindClickHandlers()
 })
@@ -30,11 +9,11 @@ const bindClickHandlers = () => {
     fetch(`/recipes.json`)
       .then(response => response.json())
       .then(recipes => {
-        $('.article').html('')
+        $('.container-page').html('')
         recipes.forEach(recipe => {
           let newRecipe = new Recipe(recipe)
           let recipeHtml = newRecipe.formatIndex()
-          $('.article').append(recipeHtml)
+          $('.container-page').append(recipeHtml)
         })
       })
   })
@@ -47,12 +26,49 @@ const bindClickHandlers = () => {
     .then(response => response.json())
     .then(recipe => {
       //$('.search-box').html('')
-      $('.article').html('')
+      $('.container-page').html('')
       let newRecipe = new Recipe(recipe)
       let recipeHtml = newRecipe.formatShow()
-      $('.article').append(recipeHtml)
+      $('.container-page').append(recipeHtml)
     })
   })
+
+  $("#recipe-form").submit(function(event) {
+      event.preventDefault();
+      let id = $(this).attr('data-id')
+      var $form = $(this);
+      var url = $form.attr('action');
+      var params = $form.serialize();
+
+      fetch(`/recipes/${id}.json`)
+      .then(response => response.json())
+      .then(recipe => {
+      $.post(url, params, "json")
+      $('.container-page').html('')
+      let newRecipe = new Recipe(recipe)
+      let recipeHtml = newRecipe.formatShow()
+      $('.container-page').append(recipeHtml)
+    })
+  })
+
+
+  $("#new_ingredient_button").click(function(event) {
+    var $button = $(this);
+    var url = $(this).data("url")
+
+    $.get(url, function(response) {
+      $button.before(response)
+    })
+    event.preventDefault();
+       addNewIngredient();
+  });
+}
+
+var addNewIngredient = function() {
+    var $new_ingredients = $("#new_ingredients");
+    var ingredientInput = `<name="recipe[ingredients_attributes][][name]">`;
+    ingredientInput += `< name="recipe[ingredients_attributes][][quantity]">`
+    $new_ingredients.append(ingredientInput);
 }
 
 function Recipe(recipe) {
