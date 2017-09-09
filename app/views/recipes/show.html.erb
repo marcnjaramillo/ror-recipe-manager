@@ -14,11 +14,10 @@
   </div>
 
   <h2>Ingredients</h2>
-  <ul>
+  <ul id="ingredients-list">
     <% @recipe.recipe_ingredients.each do |ri| %>
       <li><%= ri.quantity %> <%= ri.ingredient.name %></li>
     <% end %>
-    <button id="new_ingredient_button" type="button" data-url="/recipes/ingredients/new">Add New Ingredient</button>
   </ul>
 
 
@@ -29,4 +28,22 @@
     <% end %>
   </ul>
   <%= link_to "Recipes Home", recipes_path, class: "btn btn-sm btn-primary" %>
+</div>
+
+<% if current_user %>
+  <h4>Add a comment:</h4>
+    <%= form_for @comment, url: recipe_comments_path(@recipe, @comment)  do |f| %>
+      <p><strong>Content</strong> <%= f.text_area :content, class: 'commentBox form-control' %></p>
+      <button type="submit" class="btn btn-sm btn-primary">Create Comment</button>
+    <% end %><br>
+<% else %>
+  <p>Please log in order to add a comment.</p>
+<% end %>
+<h4>Comments:</h4>
+<div id="submitted-comments">
+  <% @recipe.comments.each do |comment| %>
+  <div id="comment-<%= comment.id %>">
+    <strong class="commentUserName"><%= comment.user.username %></strong> : <span class="commentContent"><%= comment.content %></span>
+  </div>
+  <% end %>
 </div>
