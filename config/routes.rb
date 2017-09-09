@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
 
-  resources :comments
   root 'users#home'
 
-  resources :recipes
+  resources :recipes do
+    resources :comments
+  end
 
   resources :users, only: [:create, :show, :edit, :update, :destroy] do
     resources :recipes
