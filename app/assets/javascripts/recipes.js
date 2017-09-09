@@ -33,25 +33,6 @@ const bindClickHandlers = () => {
     })
   })
 
-  $("#recipe-form").submit(function(event) {
-      event.preventDefault();
-      let id = $(this).attr('data-id')
-      var $form = $(this);
-      var url = $form.attr('action');
-      var params = $form.serialize();
-
-      fetch(`/recipes/${id}.json`)
-      .then(response => response.json())
-      .then(recipe => {
-      $.post(url, params, "json")
-      $('.container-page').html('')
-      let newRecipe = new Recipe(recipe)
-      let recipeHtml = newRecipe.formatShow()
-      $('.container-page').append(recipeHtml)
-    })
-  })
-
-
   $("#new_ingredient_button").click(function(event) {
     var $button = $(this);
     var url = $(this).data("url")
@@ -104,3 +85,38 @@ Recipe.prototype.formatShow = function() {
 
   return recipeHtml
 }
+
+
+function Comment(comment) {
+  this.id = comment.id;
+  this.content = comment.content;
+  this.user = comment.user;
+}
+
+Comment.prototype.formatShow = function() {
+  var html = "" ;
+  html += "<div id=\'comment-\' + comment.id + '\'>" +  "<strong>" + this.user.username + "</strong>" + ": " + this.content + "</div>";
+  $("#submitted-comments").append(html);
+}
+
+$(function() {
+  $("form#new_comment").on("submit", function(event) {
+    event.preventDefault();
+    var $form = $(this);
+    var action = $form.attr("action");
+
+    var params = $form.serialize();
+    $.ajax({
+      url: action,
+      data: params,
+      dataType: "json",
+      method: "POST"
+    })
+    .success(function(json) {
+      $(".commentBox").val("");
+      var comment = new Comment(json);
+      comment.formatShow();
+
+    })
+  })
+})
