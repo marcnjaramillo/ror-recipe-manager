@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :comments
   root 'users#home'
 
   resources :recipes
