@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20170908184450) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "comments", force: :cascade do |t|
     t.text     "content"
     t.integer  "recipe_id"
@@ -56,9 +59,9 @@ ActiveRecord::Schema.define(version: 20170908184450) do
     t.string   "username"
     t.string   "email"
     t.string   "password_digest"
-    t.integer  "uid",             limit: 30
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.integer  "uid"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
 end
