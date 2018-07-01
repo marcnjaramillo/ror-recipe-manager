@@ -47,3 +47,8 @@
   </div>
   <% end %>
 </div>
+<div class="recipe-editor">
+  <% if logged_in? && @recipe.user == current_user %>
+    <%= link_to "Delete Comment", recipe_comment_path(@comment), method: :delete, class: "btn btn-sm btn-default" %>
+  <% end %>
+</div>
