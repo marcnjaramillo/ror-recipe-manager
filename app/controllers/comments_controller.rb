@@ -8,6 +8,27 @@ class CommentsController < ApplicationController
     render json: @comment, status: 201
   end
 
+  def edit
+    @comment = Comment.find(params[:id])
+  end
+
+  def update
+    @comment = Comment.find(params[:id])
+    if @comment.update(comments_params)
+      flash[:success] = "Recipe successfully updated."
+      redirect_to recipe_path(@recipe)
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    comment = Comment.find(params[:id])
+    user = comment.user
+    comment.destroy
+    flash[:success] = "Recipe successfully deleted."
+    redirect_to recipe_path(@recipe)
+  end
 
 
   private
