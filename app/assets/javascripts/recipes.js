@@ -17,7 +17,7 @@ const bindClickHandlers = () => {
         })
       })
   })
-
+}
   $(document).on('click', ".show", function(event) {
     event.preventDefault()
     let id = $(this).attr('data-id')
@@ -32,25 +32,6 @@ const bindClickHandlers = () => {
       $('.container-page').append(recipeHtml)
     })
   })
-
-  $("#new_ingredient_button").click(function(event) {
-    var $button = $(this);
-    var url = $(this).data("url")
-
-    $.get(url, function(response) {
-      $button.before(response)
-    })
-    event.preventDefault();
-       addNewIngredient();
-  });
-}
-
-var addNewIngredient = function() {
-    var $new_ingredients = $("#new_ingredients");
-    var ingredientInput = `<name="recipe[ingredients_attributes][][name]">`;
-    ingredientInput += `< name="recipe[ingredients_attributes][][quantity]">`
-    $new_ingredients.append(ingredientInput);
-}
 
 function Recipe(recipe) {
   this.id = recipe.id
