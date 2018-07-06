@@ -1,0 +1,12 @@
+<div class="form-inline  clearfix">
+  <div class=" form-group nested-fields">
+	 <%= f.label :quantity, "Quantity" %>
+		<%= f.text_field :quantity, class: 'form-control'%>
+
+		<%= f.fields_for(:ingredient) do |ri_ingredient| %>
+		<%= ri_ingredient.label :name, "Name" %>
+		<%= ri_ingredient.text_field :name, class: 'form-control'%>
+	  <% end %>
+		<%= link_to_remove_association "Remove", f, class: "btn btn-default form-button" %>
+	</div>
+</div>

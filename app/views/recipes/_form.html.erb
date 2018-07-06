@@ -1,4 +1,4 @@
-<%= form_for(recipe) do |f| %>
+<%= form_for @recipe do |f| %>
   <%= render 'shared/errors', object: f.object %>
 
   <div class="field">
@@ -15,11 +15,19 @@
   </div>
 
   <h3>Ingredients</h3>
-
-    <div class='form-group'>
-      <%= render "ingredients/new_ingredient" %>
-      <button id="new_ingredient_button" type="button" data-url="/recipes/ingredients/new">Add New Ingredient</button>
+  <div class='form-group'>
+    <div id="recipe-ingredients">
+      <ol>
+      <%= f.fields_for(:recipe_ingredients) do |ri| %>
+        <%= render 'recipe_ingredient_fields', f: ri  %>
+      <% end %>
+      <%= link_to_add_association 'Add Ingredient', f, :recipe_ingredients,
+        'data-association-insertion-node' => "#recipe-ingredients ol",
+        'data-association-insertion-method' => "prepend",
+        :wrap_object => Proc.new {|ri| ri.build_ingredient; ri }, class: "btn btn-default form-button" %>
+      </ol>
     </div>
+  </div>
   <h3>Directions</h3>
   <%= f.fields_for :directions, @recipe.directions.build do |direction| %>
     <div class="direction">
