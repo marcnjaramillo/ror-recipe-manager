@@ -1,66 +1,10 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
-
-  def home
-
-  end
-
-  def new
-    @user = User.new
-  end
-
-  def create
-    @user = User.new(user_params)
-    if @user.save
-      session[:user_id] = @user.id
-      flash[:success] = "Successfully signed up."
-      redirect_back_or(user_path(@user))
-    else
-      render :new
-    end
-  end
-
   def show
-    @user = User.find(params[:id])
+    @user = current_user
     @recipes = @user.recipes
     respond_to do |f|
-      f.html { render :show}
-      f.json { render json:  @user}
-    end
-  end
-
-  def edit
-    @user = User.find(params[:id])
-  end
-
-  def update
-    @user = User.find(params[:id])
-    if @user.update(user_params)
-      flash[:success] = "Successfully updated."
-      redirect_to user_path(@user)
-    else
-      render :edit
-    end
-  end
-
-  def destroy
-    User.find(params[:id]).destroy
-    session.delete(:user_id)
-    flash[:success] = "Deleted user."
-    redirect_to root_url
-  end
-
-  private
-
-  def user_params
-    params.require(:user).permit(:id, :username, :email, :password)
-  end
-
-  def logged_in_user
-    unless logged_in?
-      store_location
-      flash[:danger] = "Please log in."
-      redirect_to login_url
+      f.html { render :show }
+      f.json { render json: @user }
     end
   end
 end
