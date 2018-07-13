@@ -1,4 +1,5 @@
 class RecipesController < ApplicationController
+  before_action :set_recipe, only: [:show,:edit,:update,:destroy]
 
   def index
     @recipes = Recipe.search(params[:search])
@@ -29,7 +30,6 @@ class RecipesController < ApplicationController
   end
 
   def show
-    @recipe = Recipe.find(params[:id])
     if current_user
       @comment = current_user.comments.build(recipe: @recipe)
     end
@@ -40,28 +40,29 @@ class RecipesController < ApplicationController
   end
 
   def edit
-    @recipe = Recipe.find(params[:id])
+
   end
 
   def update
-    @recipe = Recipe.find(params[:id])
     if @recipe.update(recipe_params)
-      flash[:success] = "Recipe successfully updated."
       redirect_to recipe_path(@recipe)
+      flash[:success] = "Recipe successfully updated."
     else
       render :edit
     end
   end
 
   def destroy
-    recipe = Recipe.find(params[:id])
-    user = recipe.user
-    recipe.destroy
+    @recipe.destroy
     flash[:success] = "Recipe successfully deleted."
     redirect_to user_path(user)
   end
 
   private
+
+  def set_recipe
+    @recipe = Recipe.find(params[:id])
+  end
 
   def recipe_params
     params.require(:recipe).permit(
@@ -70,8 +71,12 @@ class RecipesController < ApplicationController
       :cook_time,
       :user_id,
       :search,
-      directions_attributes: [:text],
-      ingredients_attributes: [:name, :quantity]
-    )
+      directions_attributes: [:id, :text],
+      recipe_ingredients_attributes: [
+      :id,
+      :quantity,
+      :recipe_id,
+      :ingredient_id,
+      ingredient_attributes: [:id, :name]])
   end
 end
