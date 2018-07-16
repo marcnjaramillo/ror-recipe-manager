@@ -1,54 +1,67 @@
-<div class="article">
+<div class="app-container">
   <div class="recipe-title">
     <h1>
-      <%= @recipe.name %>
-      <div class="recipe-editor">
-        <% if logged_in? && @recipe.user == current_user %>
-          <%= link_to "Edit Recipe", edit_user_recipe_path(@recipe), class: "btn btn-sm btn-primary" %>
-          <%= link_to "Delete Recipe", recipe_path(@recipe), method: :delete, class: "btn btn-sm btn-default" %>
-          <%= link_to "#{@recipe.user.username.capitalize}'s Page", user_path(@recipe.user), class: "btn btn-sm btn-primary" %>
-        <% end %>
-      </div>
+      <%= @recipe.name.split.map(&:capitalize).join(' ') %>
+      <%= image_tag @recipe.image %>
     </h1>
     <p>Prep Time: <%= @recipe.prep_time %> minutes | Cook Time: <%= @recipe.cook_time %> minutes | Recipe by: <%= link_to @recipe.user.username.capitalize, user_path(@recipe.user), id: "user" %></p>
   </div>
 
-  <h2>Ingredients</h2>
-  <ul id="ingredients-list">
-    <% @recipe.recipe_ingredients.each do |ri| %>
-      <li><%= ri.quantity %> <%= ri.ingredient.name %></li>
-    <% end %>
-  </ul>
-
-
-  <h2>Directions</h2>
-  <ul>
-    <% @recipe.directions.each do |dir| %>
-      <li id="directions" ><%= dir.text %></li>
-    <% end %>
-  </ul>
-  <%= link_to "Recipes Home", recipes_path, class: "btn btn-sm btn-primary" %>
-</div>
-
-<% if current_user %>
-  <h4>Add a comment:</h4>
-    <%= form_for @comment, url: recipe_comments_path(@recipe, @comment)  do |f| %>
-      <p><strong>Content</strong> <%= f.text_area :content, class: 'commentBox form-control' %></p>
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Ingredients</h2>
+      <ul id="ingredients-list">
+        <% @recipe.recipe_ingredients.each do |ri| %>
+        <ul>
+          <li class="ingredients"><%= ri.quantity %> <%= ri.ingredient.name %> </li>
+        </ul>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <h2>Directions</h2>
+      <ul>
+        <% @recipe.directions.each do |dir| %>
+        <li id="directions" ><%= dir.text %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-md-12">
+      <% if current_user %>
+      <h4>Add a comment:</h4>
+      <%= form_for @comment, url: recipe_comments_path(@recipe, @comment)  do |f| %>
+      <%= f.text_area :content, class: 'commentBox form-control' %>
       <button type="submit" class="btn btn-sm btn-primary">Create Comment</button>
-    <% end %><br>
-<% else %>
-  <p>Please log in order to add a comment.</p>
-<% end %>
-<h4>Comments:</h4>
-<div id="submitted-comments">
-  <% @recipe.comments.each do |comment| %>
-  <div id="comment-<%= comment.id %>">
-    <strong class="commentUserName"><%= comment.user.username %></strong> : <span class="commentContent"><%= comment.content %></span>
+      <% end %><br>
+      <% else %>
+      <p>Please log in order to add a comment.</p>
+      <% end %>
+    </div>
+    <div class="col-md-12">
+      <div class="well-white">
+        <h2>Comment(s)</h2>
+        <hr>
+        <div id="submitted-comments">
+          <% @recipe.comments.each do |comment| %>
+          <blockquote>
+            <div class="well-white well-white" id="comment-<%= comment.id %>">
+              <strong class="commentUserName"><%= comment.user.username %></strong> commented: <span class="commentContent"><%= comment.content %> </span>
+              <% if current_user == @recipe.user || current_user == @comment.user %>
+                <span><%= link_to '',recipe_comment_path(@recipe, comment), method: :delete,
+                data: { confirm: 'Are you sure?' }, class: 'glyphicon glyphicon-trash' %></span>
+              <% end %>
+            </div>
+          </blockquote>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <% if current_user == @recipe.user %>
+  <%= link_to "Edit Recipe", edit_recipe_path, class: "btn btn-sm btn-primary" %>
+  <%= link_to "Delete Recipe", recipe_path, method: :delete, class: "btn btn-sm btn-default" %>
+  <%= link_to "#{@recipe.user.username.capitalize}'s Page", user_path(@recipe.user), class: "btn btn-sm btn-primary" %>
   <% end %>
-</div>
-<div class="recipe-editor">
-  <% if logged_in? && @recipe.user == current_user %>
-    <%= link_to "Delete Comment", recipe_comment_path(@comment), method: :delete, class: "btn btn-sm btn-default" %>
-  <% end %>
+  <%= link_to "Recipes Home", recipes_path, class: "btn btn-sm btn-primary" %>
 </div>
