@@ -9,38 +9,12 @@
   </head>
 
   <body>
-    <header class="navbar navbar-fixed-top navbar-inverse">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapsed-menu" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <%= link_to "Recipe Manager", '/', id: "logo" %>
-        </div>
-        <div class="collapse navbar-collapse" id="collapsed-menu">
-          <% if logged_in? %>
-            <p class="navbar-text"><%= current_user.username.capitalize %></p>
-          <% end %>
-          <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to "Recipes", '/index', class:"all_recipes" %></li>
-            <% if logged_in? %>
-              <li><%= link_to "My Page", user_path(current_user) %></li>
-              <li><%= link_to "Sign Out", signout_path %></li>
-            <% else %>
-              <li><%= link_to "Sign Up", signup_path %></li>
-              <li><%= link_to "Sign In", signin_path %></li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-    </header>
-    <div class="container main">
-      <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
-      <% end %>
-    <%= yield %>
+    <div class="container">
+     	 <%= render "layouts/navbar" %>
+       <%= render "layouts/flash" %>
+       <div class="main">
+          <%= yield %>
+       </div>
+		</div>
   </body>
 </html>
