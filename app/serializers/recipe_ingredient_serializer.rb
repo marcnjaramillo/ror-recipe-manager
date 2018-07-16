@@ -1,8 +1,8 @@
 class RecipeIngredientSerializer < ActiveModel::Serializer
-  attributes :ingredient, :quantity
-  has_many :ingredients
+  attributes :quantity, :ingredient
+  has_one :ingredient
 
   def ingredient
-    return object.ingredient.name
+    object.ingredient.name
   end
 end
