@@ -11,8 +11,11 @@ class RecipesController < ApplicationController
   end
 
   def new
-    @user = current_user
-    @recipe = Recipe.new
+    if user_signed_in?
+      @recipe = Recipe.new
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def create
@@ -55,7 +58,7 @@ class RecipesController < ApplicationController
   def destroy
     @recipe.destroy
     flash[:success] = "Recipe successfully deleted."
-    redirect_to user_path(user)
+    redirect_to recipes_path
   end
 
   private
@@ -71,12 +74,11 @@ class RecipesController < ApplicationController
       :cook_time,
       :user_id,
       :search,
+      :image,
       directions_attributes: [:id, :text],
       recipe_ingredients_attributes: [
       :id,
       :quantity,
-      :recipe_id,
-      :ingredient_id,
       ingredient_attributes: [:id, :name]])
   end
 end
