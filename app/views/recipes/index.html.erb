@@ -13,7 +13,7 @@
 </div>
 
 <div class="recipe-editor">
-  <% if logged_in? %>
+  <% if current_user %>
     <%= link_to "Add New Recipe", new_recipe_path, class: "btn btn-sm btn-primary" %>
   <% end %>
 </div>
