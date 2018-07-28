@@ -18,7 +18,11 @@ class Recipe < ApplicationRecord
   scope :sorted, lambda {order("created_at DESC")}
   scope :search, lambda {|search| where(["name LIKE ?", "%#{search}%"])}
 
-  def empty_children(attributes)
-    attributes[:name].blank? && attributes[:quantity].blank?
+  # def empty_children(attributes)
+  #   attributes[:name].blank? && attributes[:quantity].blank?
+  # end
+
+  def self.categories
+    ['Breakfast', 'Lunch', 'Dinner', 'Dessert', 'Soup', 'Salad', 'Sauce', 'Appetizer', 'Side Dish']
   end
 end
