@@ -5,6 +5,7 @@
       <%= image_tag @recipe.image %>
     </h1>
     <p>Prep Time: <%= @recipe.prep_time %> minutes | Cook Time: <%= @recipe.cook_time %> minutes | Recipe by: <%= link_to @recipe.user.username.capitalize, user_path(@recipe.user), id: "user" %></p>
+    <p>Category: <%= @recipe.category %></p>
   </div>
 
   <div class="row">
