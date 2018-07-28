@@ -1,47 +1,69 @@
 <%= form_for @recipe do |f| %>
   <%= render 'shared/errors', object: f.object %>
-
-  <div class="field">
-    <%= f.label :name, "Recipe Name" %>
-    <%= f.text_field :name %>
-    <%= f.file_field :image %>
+  <div class="col-md">
+    <h1>Add A New Recipe</h1>
   </div>
-
-  <div class="field">
-    <h3>Time</h3>
-    <span><%= f.label :prep_time, "Prep Time" %></span>
-    <span><%= f.text_field :prep_time%> minutes</span>
-    <span><%= f.label :cook_time, "Cook Time" %></span>
-    <span><%= f.text_field :cook_time %> minutes</span>
+  <div class="row">
+      <div class="col-sm-6">
+        <%= f.label :name, "Recipe Name" %><br>
+        <%= f.text_field(:name, class: "form-control", :placeholder => "Ex: Eggs Benedict") %>
+      </div>
+      <div class="col-sm-6">
+        <%= f.label :category, "Category" %><br>
+        <%= f.select :category, options_for_select(Recipe.categories), :prompt => "Select a category" %>
+      </div>
   </div>
-
-  <h3>Ingredients</h3>
-  <div class='form-group'>
-    <div id="recipe-ingredients">
-      <ol>
-      <%= f.fields_for(:recipe_ingredients) do |ri| %>
-        <%= render 'recipe_ingredient_fields', f: ri  %>
-      <% end %>
-      <%= link_to_add_association 'Add Ingredient', f, :recipe_ingredients,
-        'data-association-insertion-node' => "#recipe-ingredients ol",
-        'data-association-insertion-method' => "prepend",
-        :wrap_object => Proc.new {|ri| ri.build_ingredient; ri }, class: "btn btn-default form-button" %>
-      </ol>
+  <div class="row">
+    <div class="col-md-6">
+      <h3>Recipe Image</h3>
+      <%= f.file_field :image %>
     </div>
   </div>
-  <h3>Directions</h3>
-    <div id="directions">
-      <%= f.fields_for(:directions) do |direction| %>
-    	   <%= render 'direction_fields', f: direction %>
-      <% end %>
-      <%= link_to_add_association 'Add Step', f, :directions,
-          'data-association-insertion-node' => "#directions",
-          'data-association-insertion-method' => "prepend", class: "btn btn-default form-button" %>
+  <div class="row">
+    <div class="col-md-6">
+      <h3>Time</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-5">
+      <span><%= f.label :prep_time, "Prep Time" %></span><br>
+      <span><%= f.text_field(:prep_time, class: 'form-control', :placeholder => "Ex: 30 minutes") %></span><br>
+    </div>
+    <div class="col-sm-5">
+      <%= f.label :cook_time, "Cook Time" %><br>
+      <%= f.text_field(:cook_time, class: "form-control", :placeholder => "Ex: 30 minutes") %><br>
+    </div>
+  </div>
+  <div class="row" id="ingredients-directions-fields">
+    <div class="col-md-7">
+      <h3>Ingredients</h3>
+      <div id="recipe-ingredients">
+        <%= f.fields_for(:recipe_ingredients) do |ri| %>
+        <%= render 'recipe_ingredient_fields', f: ri  %>
+        <% end %>
+        <%= link_to_add_association "Add Ingredient", f, :recipe_ingredients,
+        'data-association-insertion-node' => "#recipe-ingredients",
+        'data-association-insertion-method' => "prepend",
+        :wrap_object => Proc.new {|ri| ri.build_ingredient; ri }, class: "btn btn-default form-button" %>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <h3>Directions</h3>
+      <div id="directions">
+        <%= f.fields_for(:directions) do |direction| %>
+        <%= render 'direction_fields', f: direction %>
+        <% end %>
+        <%= link_to_add_association "Add Step", f, :directions,
+        'data-association-insertion-node' => "#directions",
+        'data-association-insertion-method' => "prepend", class: "btn btn-default form-button" %>
       </br>
       <%= f.hidden_field(:user_id, value: current_user.id) %>
     </div>
-
-  <div class="actions">
-    <%= f.submit %>
   </div>
+</div>
+<div class="col-md-2" id="submitted">
+  <div class="actions">
+    <%= f.submit class: "btn btn-default" %>
+  </div>
+</div>
 <% end %>
