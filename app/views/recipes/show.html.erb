@@ -1,13 +1,25 @@
 <div class="app-container">
-  <div class="recipe-title">
-    <h1>
-      <%= @recipe.name.split.map(&:capitalize).join(' ') %>
-      <%= image_tag @recipe.image %>
-    </h1>
-    <p>Prep Time: <%= @recipe.prep_time %> minutes | Cook Time: <%= @recipe.cook_time %> minutes | Recipe by: <%= link_to @recipe.user.username.capitalize, user_path(@recipe.user), id: "user" %></p>
-    <p>Category: <%= @recipe.category %></p>
+  <div class="row">
+    <div class="recipe-title">
+      <div class="col-md-4">
+        <h1>
+          <%= @recipe.name.split.map(&:capitalize).join(' ') %>
+        </h1>
+        <h4> Recipe by: <%= link_to @recipe.user.username.capitalize, user_path(@recipe.user), id: "user" %></h4>
+      </div>
+      <div class="col-md-4">
+        <h2>Category</h2>
+          <p><%= @recipe.category %></p>
+        <h2>Prep Time</h2>
+          <p><%= @recipe.prep_time %></p>
+        <h2>Cook Time</h2>
+          <p><%= @recipe.cook_time %></p>
+      </div>
+      <div class="col-md-4">
+        <%= image_tag @recipe.image, class: "img-fluid img-thumbnail" %>
+      </div>
+    </div>
   </div>
-
   <div class="row">
     <div class="col-md-6">
       <h2>Ingredients</h2>

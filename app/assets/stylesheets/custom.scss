@@ -39,6 +39,16 @@ body {
   font-size: 16px;
 }
 
+div#form-title {
+  margin-left: 15px;
+}
+
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+
 /* header */
 
 #logo {
@@ -170,6 +180,7 @@ div#ingredients-directions-fields {
 }
 
 div#submitted {
+  margin-left: 15px;
   padding-left: 0px;
 }
 
