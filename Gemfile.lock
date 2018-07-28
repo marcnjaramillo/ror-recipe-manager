@@ -203,7 +203,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
-  bootstrap-sass (= 3.3.6)
+  bootstrap-sass (>= 3.3.6)
   byebug
   cocoon (~> 1.2, >= 1.2.11)
   coffee-rails (~> 4.2)
