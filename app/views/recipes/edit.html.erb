@@ -1,4 +1,4 @@
 <h1>Edit Your Recipe</h1>
 
-<%= render "form", recipe: @recipe %>
-<%= link_to "Cancel", user_path(@recipe.user), class: "btn btn-sm btn-primary" %>
+<%= render "form", recipe: @recipe, submit_btn: "Update" %>
+<%= link_to "Cancel", user_path(@recipe.user), class: "btn btn-danger" %>
