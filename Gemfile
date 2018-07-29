@@ -36,6 +36,7 @@ gem 'bootstrap-sass', '>= 3.3.6'
 gem 'devise'
 gem 'dotenv-rails'
 gem 'pry'
+gem "aws-sdk-s3", require: false
 # gem 'omniauth-facebook'
 # gem 'omniauth'
 
