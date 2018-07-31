@@ -15,6 +15,7 @@
 //= require widget.js
 //= require jquery.fileupload.js
 //= require bootstrap-sprockets
+//= require activestorage
 //= require cocoon
 //= require recipes
 //= require_tree .
