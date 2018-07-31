@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require direct_uploads
 //= require bootstrap-sprockets
 //= require activestorage
 //= require cocoon
