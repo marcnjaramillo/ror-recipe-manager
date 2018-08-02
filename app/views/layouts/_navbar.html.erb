@@ -29,11 +29,18 @@
       <% end %>
     </ul>
   <% else %>
-    <ul class="nav navbar-nav pull-right">
+    <ul class="nav navbar-nav ml-auto">
       <li><%= link_to "Recipes", recipes_path, class: "nav-link" %></li>
       <li><%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %></li>
       <li><%= link_to "Sign In", new_user_session_path, class: "nav-link" %></li>
+      <%= form_tag(recipes_path, :method => "get", class: "form-inline my-2 my-lg-0", id: "search-form") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search Recipes", class: "form-control mr-sm-2" %>
+        <span class="input-group-btn">
+          <%= submit_tag "Search", class: "btn btn-outline-info my-2 my-sm-0" %>
+        </span>
+      <% end %>
     </ul>
+
   <% end %>
   </div>
 </nav>
