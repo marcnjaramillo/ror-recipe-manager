@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>My Recipe Box</title>
+<head>
+  <title>My Recipe Box</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
-  </head>
-
-  <body>
-    <div class="container">
-     	 <%= render "layouts/navbar" %>
-       <%= render "layouts/flash" %>
-       <div class="main">
-          <%= yield %>
-       </div>
-		</div>
-  </body>
+</head>
+<body>
+  <%= render "layouts/navbar" %>
+  <%= render "layouts/flash" %>
+  <div class="main">
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
+  </div>
+</body>
 </html>

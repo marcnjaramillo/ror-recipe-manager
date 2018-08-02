@@ -1,16 +1,5 @@
-<div class="app container">
-  <div class="container">
-    <div class="row">
-      <div class="col align-self-center">
-        <div class="form-group">
-          <div class="panel-body">
-          <%= render "form", recipe: @recipe, submit_btn: "Create Recipe" %>
-            <div class="col-md-2">
-              <%= link_to "Cancel", recipes_path, class: "btn btn-danger" %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<div class="form-group">
+  <div class="panel-body">
+    <%= render "form", recipe: @recipe, submit_btn: "Create Recipe" %>
   </div>
 </div>

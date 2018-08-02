@@ -1,13 +1,12 @@
-<div class="app-container">
   <div class="row">
-    <div class="recipe-title">
-      <div class="col-md-4">
+
+      <div class="col">
         <h1>
           <%= @recipe.name.split.map(&:capitalize).join(' ') %>
         </h1>
         <h4> Recipe by: <%= link_to @recipe.user.username.capitalize, user_path(@recipe.user), id: "user" %></h4>
       </div>
-      <div class="col-md-4">
+      <div class="col">
         <h2>Category</h2>
           <p><%= @recipe.category %></p>
         <h2>Prep Time</h2>
@@ -15,19 +14,16 @@
         <h2>Cook Time</h2>
           <p><%= @recipe.cook_time %></p>
       </div>
-      <div class="col-md-4">
-        <%= image_tag @recipe.image, class: "img-fluid img-thumbnail" %>
+      <div class="col">
+        <%= image_tag @recipe.image, class: "img-thumbnail w-75" %>
       </div>
-    </div>
   </div>
   <div class="row">
     <div class="col-md-6">
       <h2>Ingredients</h2>
       <ul id="ingredients-list">
         <% @recipe.recipe_ingredients.each do |ri| %>
-        <ul>
           <li class="ingredients"><%= ri.quantity %> <%= ri.ingredient.name %> </li>
-        </ul>
         <% end %>
       </ul>
     </div>
@@ -72,9 +68,7 @@
   </div>
 
   <% if current_user == @recipe.user %>
-  <%= link_to "Edit Recipe", edit_recipe_path, class: "btn btn-sm btn-primary" %>
-  <%= link_to "Delete Recipe", recipe_path, method: :delete, class: "btn btn-sm btn-default" %>
-  <%= link_to "#{@recipe.user.username.capitalize}'s Page", user_path(@recipe.user), class: "btn btn-sm btn-primary" %>
+  <%= link_to "Edit Recipe", edit_recipe_path, class: "btn btn-sm btn-info" %>
+  <%= link_to "Delete Recipe", recipe_path, method: :delete, class: "btn btn-sm btn-danger" %>
   <% end %>
-  <%= link_to "Recipes Home", recipes_path, class: "btn btn-sm btn-primary" %>
-</div>
+  <%= link_to "Recipes Home", recipes_path, class: "btn btn-sm btn-secondary" %>
