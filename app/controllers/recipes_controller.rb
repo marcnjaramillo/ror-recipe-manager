@@ -7,6 +7,16 @@ class RecipesController < ApplicationController
     respond_to do |f|
       f.html
       f.json { render json: @recipes }
+
+    @breakfast = Recipe.where("category = 'Breakfast'")
+    @lunch = Recipe.where("category = 'Lunch'")
+    @dinner = Recipe.where("category = 'Dinner'")
+    @dessert = Recipe.where("category = 'Dessert'")
+    @soup = Recipe.where("category = 'Soup'")
+    @salad = Recipe.where("category = 'Salad'")
+    @sauce = Recipe.where("category = 'Sauce'")
+    @appetizer = Recipe.where("category = 'Appetizer'")
+    @side = Recipe.where("category = 'Side Dish'")
     end
   end
 
