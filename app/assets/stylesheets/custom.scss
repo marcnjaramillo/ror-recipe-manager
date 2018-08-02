@@ -1,7 +1,3 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
-
-
 $light-brown: #614D2B;
 $brown: #58472A;
 $white: #FFF;
@@ -20,15 +16,6 @@ body {
 
 .form-button {
   margin-top: 14px;
-}
-
-.btn-primary {
-  background-color: $light-brown;
-  border-color: $light-brown;
-  &:hover {
-    background-color: $brown;
-    border-color: $brown;
-  }
 }
 
 #user {
@@ -127,18 +114,8 @@ p {
   color: $off-white;
 }
 
-a {
-  color: $light-brown;
-  .recipe-name {
-    font-size: 20px;
-  }
-  &:hover {
-    color: #251D10;
-  }
-}
-
 h2.recipe-main a{
-  color: #5A3A02;
+  color: black;
 }
 
 ul {
@@ -175,13 +152,16 @@ div.form-inline.clearfix {
   margin-bottom: 1em;
 }
 
-div#ingredients-directions-fields {
+div #ingredients-directions-fields {
   padding-bottom: 4em;
 }
 
-div#submitted {
-  margin-left: 15px;
-  padding-left: 0px;
+div #recipe-info, #recipe-image, #cook-prep-time {
+  padding-bottom: 2em;
+}
+
+div #submitted {
+  padding-bottom: 2em;
 }
 
 /* alert */
@@ -189,4 +169,8 @@ div#submitted {
 .alert {
   margin-top: 20px;
   margin-bottom: 10px;
+}
+
+img {
+  max-height: 14em;
 }
