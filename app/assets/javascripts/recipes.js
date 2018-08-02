@@ -18,20 +18,21 @@ const bindClickHandlers = () => {
       })
   })
 }
-  $(document).on('click', ".show", function(event) {
-    event.preventDefault()
-    let id = $(this).attr('data-id')
-    history.pushState(null, null, `/recipes/${id}`)
-    fetch(`/recipes/${id}.json`)
-    .then(response => response.json())
-    .then(recipe => {
-      //$('.search-box').html('')
-      $('.container-page').html('')
-      let newRecipe = new Recipe(recipe)
-      let recipeHtml = newRecipe.formatShow()
-      $('.container-page').append(recipeHtml)
-    })
-  })
+//=======This function is firing because BS4 has a .show in the dropdown menu======
+  // $(document).on('click', ".show", function(event) {
+  //   event.preventDefault()
+  //   let id = $(this).attr('data-id')
+  //   history.pushState(null, null, `/recipes/${id}`)
+  //   fetch(`/recipes/${id}.json`)
+  //   .then(response => response.json())
+  //   .then(recipe => {
+  //     //$('.search-box').html('')
+  //     $('.container-page').html('')
+  //     let newRecipe = new Recipe(recipe)
+  //     let recipeHtml = newRecipe.formatShow()
+  //     $('.container-page').append(recipeHtml)
+  //   })
+  // })
 
 function Recipe(recipe) {
   this.id = recipe.id
