@@ -5,6 +5,7 @@ $off-white: #F5F5F5;
 
 /* body */
 body {
+  padding-top: 4em;
   margin-bottom: 50px;
   background: url(asset_path('cooking.jpg')) no-repeat;
   background-size: cover;
@@ -18,8 +19,12 @@ body {
   margin-top: 14px;
 }
 
-#user {
-  font-size: 16px;
+// #user {
+//   font-size: 16px;
+// }
+
+nav {
+  padding-bottom: 4em;
 }
 
 .navbar-text {

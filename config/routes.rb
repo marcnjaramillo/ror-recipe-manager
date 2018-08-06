@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  root 'users#home'
+  root 'recipes#index'
   get '/user/profile' => 'users#show'
 
   resources :recipes do

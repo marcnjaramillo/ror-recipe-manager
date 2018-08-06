@@ -3,11 +3,6 @@ class RecipesController < ApplicationController
 
   def index
     @recipes = Recipe.search(params[:search])
-
-    respond_to do |f|
-      f.html
-      f.json { render json: @recipes }
-
     @breakfast = Recipe.where("category = 'Breakfast'")
     @lunch = Recipe.where("category = 'Lunch'")
     @dinner = Recipe.where("category = 'Dinner'")
@@ -17,6 +12,10 @@ class RecipesController < ApplicationController
     @sauce = Recipe.where("category = 'Sauce'")
     @appetizer = Recipe.where("category = 'Appetizer'")
     @side = Recipe.where("category = 'Side Dish'")
+
+    respond_to do |f|
+      f.html
+      f.json { render json: @recipes }
     end
   end
 

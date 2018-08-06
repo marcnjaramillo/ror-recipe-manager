@@ -10,9 +10,9 @@
         <h2>Category</h2>
           <p><%= @recipe.category %></p>
         <h2>Prep Time</h2>
-          <p><%= @recipe.prep_time %></p>
+          <p><%= @recipe.prep_time %> minute(s)</p>
         <h2>Cook Time</h2>
-          <p><%= @recipe.cook_time %></p>
+          <p><%= @recipe.cook_time %> minute(s)</p>
       </div>
       <div class="col">
         <%= image_tag @recipe.image, class: "img-thumbnail w-75" %>

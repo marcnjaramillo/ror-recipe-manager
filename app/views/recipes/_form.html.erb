@@ -31,10 +31,16 @@
 </div>
 <div class="row" id="cook-prep-time">
   <div class="col">
-    <span><%= f.text_field(:prep_time, class: 'form-control', :placeholder => "Prep Time (Ex: 30 minutes)") %></span><br>
+    <div class="input-group mb-3 w-50">
+      <%= f.text_field(:prep_time, class: "form-control", :placeholder => "Prep Time (Ex: 30)") %>
+      <span class="input-group-text" id="basic-addon2">minute(s)</span><br>
+    </div>
   </div>
   <div class="col">
-    <span><%= f.text_field(:cook_time, class: "form-control", :placeholder => "Cook Time (Ex: 30 minutes)") %></span><br>
+    <div class="input-group mb-3 w-50">
+      <%= f.text_field(:cook_time, class: "form-control", :placeholder => "Cook Time (Ex: 30)") %>
+      <span class="input-group-text" id="basic-addon2">minute(s)</span><br>
+    </div>
   </div>
 </div>
 <div class="row" id="ingredients-directions-fields">
